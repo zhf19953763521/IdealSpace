@@ -7,6 +7,54 @@ const likeBtns = document.querySelectorAll('.like-btn');
 const navItems = document.querySelectorAll('.nav-item');
 const searchInput = document.querySelector('.search-input');
 
+// ==================== 登录弹窗 ====================
+const loginBtn = document.getElementById('loginBtn');
+const loginModal = document.getElementById('loginModal');
+const closeLogin = document.getElementById('closeLogin');
+const confirmLogin = document.getElementById('confirmLogin');
+const loginAccount = document.getElementById('loginAccount');
+const loginPassword = document.getElementById('loginPassword');
+
+function openLoginModal() {
+    loginModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLoginModalHandler() {
+    loginModal.classList.remove('active');
+    document.body.style.overflow = '';
+    loginAccount.value = '';
+    loginPassword.value = '';
+}
+
+loginBtn.addEventListener('click', openLoginModal);
+closeLogin.addEventListener('click', closeLoginModalHandler);
+
+loginModal.addEventListener('click', (e) => {
+    if (e.target === loginModal) {
+        closeLoginModalHandler();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && loginModal.classList.contains('active')) {
+        closeLoginModalHandler();
+    }
+});
+
+confirmLogin.addEventListener('click', function() {
+    const account = loginAccount.value.trim();
+    const password = loginPassword.value.trim();
+
+    if (!account || !password) {
+        alert('请填写账号和密码哦~ (｡•́︿•̀｡)');
+        return;
+    }
+
+    alert('登录成功！🌸');
+    closeLoginModalHandler();
+});
+
 // ==================== 发帖弹窗 ====================
 function openModal() {
     postModal.classList.add('active');
